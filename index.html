@@ -22,13 +22,11 @@
           <img :class="{ 'out-of-stock-img': !inStock }" :src="image">
         </div>
         <div class="product-info">
-          <h1>{{ product }}</h1>
+          <h1>{{ title }}</h1>
+          <p>{{ sale }}</p>
 
-          <p v-if="inventory > 10">
+          <p v-if="inStock">
             In Stock
-          </p>
-          <p v-else-if="inventory <= 10 && inventory > 0">
-            Almost Sold out
           </p>
           <p v-else>
             Out of Stock
@@ -48,8 +46,8 @@
             </li>
           </ul> -->
 
-          <div class="color-circle" v-for="variant in variants" :key="variant.id"
-            @mouseover="updateImage(variant.image)" :style="{ 'background-color': variant.color }">
+          <div class="color-circle" v-for="(variant, variantIdx) in variants" :key="variant.id"
+            @mouseover="updateVariant(variantIdx)" :style="{ 'background-color': variant.color }">
           </div>
 
           <!-- <a :href="url">Made by Vue Mastery</a> -->

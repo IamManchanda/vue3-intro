@@ -3,9 +3,10 @@ const app = Vue.createApp({
     return {
       cart: 0,
       product: "Socks",
-      image: "./assets/images/socks_green.jpg",
+      brand: "Vue Mastery",
       url: "https://www.vuemastery.com/",
-      inventory: 0,
+      inventory: 100,
+      selectedVariantIdx: 0,
       onSale: true,
       details: ["50% cotton", "30% wool", "20% polyester"],
       sizes: ["S", "M", "L", "XL"],
@@ -14,11 +15,13 @@ const app = Vue.createApp({
           id: 2234,
           color: "green",
           image: "./assets/images/socks_green.jpg",
+          quantity: 50,
         },
         {
           id: 2235,
           color: "blue",
           image: "./assets/images/socks_blue.jpg",
+          quantity: 0,
         },
       ],
     };
@@ -32,13 +35,25 @@ const app = Vue.createApp({
         this.cart -= 1;
       }
     },
-    updateImage(variantImage) {
-      this.image = variantImage;
+    updateVariant(variantIdx) {
+      this.selectedVariantIdx = variantIdx;
     },
   },
   computed: {
+    image() {
+      return this.variants[this.selectedVariantIdx].image;
+    },
     inStock() {
-      return this.inventory > 0;
+      return this.variants[this.selectedVariantIdx].quantity > 0;
+    },
+    title() {
+      return `${this.brand} ${this.product}`;
+    },
+    sale() {
+      if (this.onSale) {
+        return `${this.title} is on sale.`;
+      }
+      return "";
     },
   },
 });
