@@ -16,53 +16,15 @@
 
     <div class="cart">Cart ({{ cart }})</div>
 
-    <div class="product-display">
-      <div class="product-container">
-        <div class="product-image">
-          <img :class="{ 'out-of-stock-img': !inStock }" :src="image">
-        </div>
-        <div class="product-info">
-          <h1>{{ title }}</h1>
-          <p>{{ sale }}</p>
+    <product-display :premium="premium" />
 
-          <p v-if="inStock">
-            In Stock
-          </p>
-          <p v-else>
-            Out of Stock
-          </p>
-
-          <!-- <p v-if="onSale">On Sale!</p> -->
-
-          <ul>
-            <li v-for="(detail, detailIdx) in details" :key="detailIdx">
-              {{ detail }}
-            </li>
-          </ul>
-
-          <!-- <ul>
-            <li v-for="(size, sizeIdx) in sizes" :key="sizeIdx">
-              {{ size }}
-            </li>
-          </ul> -->
-
-          <div class="color-circle" v-for="(variant, variantIdx) in variants" :key="variant.id"
-            @mouseover="updateVariant(variantIdx)" :style="{ 'background-color': variant.color }">
-          </div>
-
-          <!-- <a :href="url">Made by Vue Mastery</a> -->
-
-          <button class="button" :class="{ 'disabled-button': !inStock }" @click="addToCart" :disabled="!inStock">Add to
-            Cart</button>
-
-          <!-- <button class="button" @click="removeFromCart">Remove Item</button> -->
-        </div>
-      </div>
-    </div>
   </div>
 
   <!-- Import App -->
   <script src="./main.js"></script>
+
+  <!-- Import Component -->
+  <script src="./components/ProductDisplay.js"></script>
 
   <!-- Mount App -->
   <script>
