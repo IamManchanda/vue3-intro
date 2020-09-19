@@ -19,7 +19,7 @@
     <div class="product-display">
       <div class="product-container">
         <div class="product-image">
-          <img :src="image">
+          <img :class="{ 'out-of-stock-img': !inStock }" :src="image">
         </div>
         <div class="product-info">
           <h1>{{ product }}</h1>
@@ -48,14 +48,16 @@
             </li>
           </ul> -->
 
-          <div v-for="variant in variants" :key="variant.id" @mouseover="updateImage(variant.image)">
-            {{ variant.color }}
+          <div class="color-circle" v-for="variant in variants" :key="variant.id"
+            @mouseover="updateImage(variant.image)" :style="{ 'background-color': variant.color }">
           </div>
 
           <!-- <a :href="url">Made by Vue Mastery</a> -->
 
-          <button class="button" @click="addToCart">Add to Cart</button>
-          <button class="button" @click="removeFromCart" :disabled="cart <= 0">Remove Item</button>
+          <button class="button" :class="{ 'disabled-button': !inStock }" @click="addToCart" :disabled="!inStock">Add to
+            Cart</button>
+
+          <!-- <button class="button" @click="removeFromCart">Remove Item</button> -->
         </div>
       </div>
     </div>
