@@ -24,8 +24,6 @@ app.component("product-display", {
 
           <p>Shipping: {{ shipping }}</p>
 
-          <!-- <p v-if="onSale">On Sale!</p> -->
-
           <ul>
             <li v-for="(detail, detailIdx) in details" :key="detailIdx">
               {{ detail }}
@@ -38,16 +36,23 @@ app.component("product-display", {
             </li>
           </ul> -->
 
-          <div class="color-circle" v-for="(variant, variantIdx) in variants" :key="variant.id"
-            @mouseover="updateVariant(variantIdx)" :style="{ 'background-color': variant.color }">
+          <div 
+            class="color-circle" 
+            v-for="(variant, variantIdx) in variants" 
+            :key="variant.id" 
+            @mouseover="updateVariant(variantIdx)" 
+            :style="{ 'background-color': variant.color }"
+          >
           </div>
 
-          <!-- <a :href="url">Made by Vue Mastery</a> -->
-
-          <button class="button" :class="{ 'disabled-button': !inStock }" @click="addToCart" :disabled="!inStock">Add to
-            Cart</button>
-
-          <!-- <button class="button" @click="removeFromCart">Remove Item</button> -->
+          <button 
+            class="button" 
+            :class="{ 'disabled-button': !inStock }" 
+            @click="addToCart" 
+            :disabled="!inStock"
+          >
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>
@@ -56,8 +61,6 @@ app.component("product-display", {
     return {
       product: "Socks",
       brand: "Vue Mastery",
-      url: "https://www.vuemastery.com/",
-      inventory: 100,
       selectedVariantIdx: 0,
       onSale: true,
       details: ["50% cotton", "30% wool", "20% polyester"],
@@ -80,12 +83,7 @@ app.component("product-display", {
   },
   methods: {
     addToCart() {
-      this.cart += 1;
-    },
-    removeFromCart() {
-      if (this.cart >= 1) {
-        this.cart -= 1;
-      }
+      this.$emit("add-to-cart", this.variants[this.selectedVariantIdx].id);
     },
     updateVariant(variantIdx) {
       this.selectedVariantIdx = variantIdx;
