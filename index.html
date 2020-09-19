@@ -32,8 +32,25 @@
             Out of Stock
           </p>
 
-          <p v-if="onSale">On Sale!</p>
-          <a :href="url">Made by Vue Mastery</a>
+          <!-- <p v-if="onSale">On Sale!</p> -->
+
+          <ul>
+            <li v-for="(detail, detailIdx) in details" :key="detailIdx">
+              {{ detail }}
+            </li>
+          </ul>
+
+          <!-- <ul>
+            <li v-for="(size, sizeIdx) in sizes" :key="sizeIdx">
+              {{ size }}
+            </li>
+          </ul> -->
+
+          <!-- <div v-for="variant in variants" :key="variant.id">
+            {{ variant.color }}
+          </div> -->
+
+          <!-- <a :href="url">Made by Vue Mastery</a> -->
         </div>
       </div>
     </div>
